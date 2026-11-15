@@ -20,6 +20,11 @@ to find "mavericks": MPs whose votes put them closer to another party than to th
 
 Period: 1 Nov 2022 (election day) to 30 Sep 2025, which gives 1,377 voting sessions and about 233k individual ballots.
 
+The 2022 legislature lasted until the election of 24 March 2026, but we stop before the 2025–26 parliamentary year because:
+1. We keep three **complete** parliamentary years (2022–23, 2023–24, 2024–25). The 2025–26 year was cut short when the election was called in February 2026.
+2. Votes just before an election are shaped by campaigning (symbolic motions, parties emphasising their differences), which could look like maverick behaviour.
+3. MPs who switched party in late 2025 or early 2026 can serve as an **out-of-sample check**: we can test whether our methods flagged them as mavericks from earlier votes alone.
+
 | Column | Description |
 |---|---|
 | `session` | Voting session id |
