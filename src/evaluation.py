@@ -351,6 +351,7 @@ def compare_methods(label_dict, ground_truth, n_perm=1000, n_boot=500, seed=0):
     """
     rows = []
     for name, labels in label_dict.items():
+        labels = np.asarray(labels)
         ari_obs = adjusted_rand_index(labels, ground_truth)
         nmi_obs = normalized_mutual_info(labels, ground_truth)
 
