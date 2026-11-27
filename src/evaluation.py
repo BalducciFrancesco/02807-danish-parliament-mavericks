@@ -359,14 +359,16 @@ def compare_methods(label_dict, ground_truth, n_perm=1000, n_boot=500, seed=0):
         perm_nmi = permutation_test(labels, ground_truth, metric='nmi', n=n_perm, seed=seed)
 
         # NMI adjustment
-        nmi_adj = (nmi_obs - perm_nmi['null_mean']) / (1.0 - perm_nmi['null_mean'])
+        nmi_null = perm_nmi['null_mean']
+        nmi_adj = (nmi_obs - nmi_null) / (1.0 - nmi_null) if nmi_null < 1.0 else float ('nan')
 
         # Stability
         stab = stability(labels, ground_truth, metric='ari', n=n_boot, seed=seed)
 
         rows.append({
             'method': name,
-            'n_clusters': np.unique(labels).size,
+            'n_clusters': np.unique(labels[labels != -1]).size,
+            'n_noise': int((labels == -1).sum()),
             'ari': ari_obs,
             'nmi': nmi_obs,
             'nmi_adjusted': nmi_adj,
