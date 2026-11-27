@@ -67,11 +67,20 @@ Built by `src/build_labels.py`, which applies the group's two <50% filters
 
 ## Reading the results
 
-**NMI is not chance-corrected.** Randomly shuffled labels score well above
-zero on this ground truth, and the inflation grows with the number of
-classes. ARI is chance-corrected and reads directly. So use `ari` and
-`nmi_adjusted`; raw `nmi` is not interpretable on its own. `permutation_test`
-reports the actual null mean for a given label set.
+**NMI is not chance-corrected.** On these ground-truth files, randomly
+shuffled labels score:
+
+| ground truth | classes | ARI null | NMI null |
+|---|---|---|---|
+| first | 13 | 0.001 | 0.212 (sd 0.031) |
+| modal | 14 | 0.001 | 0.217 (sd 0.031) |
+| noswitch | 11 | 0.001 | 0.191 (sd 0.032) |
+
+So a raw NMI of 0.25 on `modal` is barely above chance, while an ARI of
+0.25 is a real result. The inflation grows with the number of classes.
+Use `ari` and `nmi_adjusted`; raw `nmi` is not interpretable on its own.
+`permutation_test` recomputes the null for whatever labels you pass in.
+Reproduce with `src/calibrate_null.py`.
 
 DBSCAN noise (`-1`) is excluded from `n_clusters` and reported separately as
 `n_noise`.
